@@ -1,12 +1,15 @@
 import * as React from 'react';
+import {
+  Header,
+  TodoList,
+} from '../components';
 
 class App extends React.Component {
   render() {
     return (
       <div className="todoapp">
-        <header className="header">
-          <h1>TODOs</h1>
-        </header>
+        <Header />
+        <TodoList />
       </div>
     );
   }
