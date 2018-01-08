@@ -1,9 +1,14 @@
 import * as React from 'react';
 import { Todo } from '../main/model';
 
-class TodoItem extends React.Component<{todo: Todo}> {
+interface TodoItemProps {
+  todo: Todo;
+  deleteTodo: (todo: Todo) => void;
+}
+
+class TodoItem extends React.Component<TodoItemProps> {
   render(): JSX.Element {
-    const { todo } = this.props;
+    const { todo, deleteTodo } = this.props;
 
     return (
       <li id={`${todo.id}`}>
@@ -15,7 +20,10 @@ class TodoItem extends React.Component<{todo: Todo}> {
           />
           <label>{todo.text}</label>
         </div>
-        <button className="destroy" />
+        <button
+          className="destroy"
+          onClick={() => deleteTodo(todo)}
+        />
       </li>
     );
   }

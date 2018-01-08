@@ -1,6 +1,5 @@
 import * as types from '../actions/ActionTypes';
 import { Todo, Todos } from '../main/model';
-import { Action } from '../actions/index';
 
 const initialState: Todos = [
   {
@@ -10,20 +9,25 @@ const initialState: Todos = [
   } as Todo
 ];
 
-function todos(state: Todos = initialState, action: Action) {
-  switch (action.type) {
+interface Action {
+  type: string;
+  payload: { todo: Todo };
+}
+
+function todos(state: Todos = initialState, { type, payload }: Action): Todos {
+  switch (type) {
     case types.ADD_TODO: 
       return [{
         id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-        text: action.payload.text,
-        completed: action.payload.completed,
+        text: payload.todo.text,
+        completed: payload.todo.completed,
       }, ...state];
 
     case types.DELETE_TODO:
-      return state.filter(todo => todo.id !== action.payload.id);
+      return state.filter(todo => todo.id !== payload.todo.id);
 
     case types.TOGGLE_TODO:
-      return state.map(todo => todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo);
+      return state.map(todo => todo.id === payload.todo.id ? { ...todo, completed: !todo.completed } : todo);
 
     default:
       return state;

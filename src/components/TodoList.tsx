@@ -13,12 +13,18 @@ interface TodoListProps {
 
 class TodoList extends React.Component<TodoListProps> {
   render(): JSX.Element {
-    const { todos } = this.props;
+    const { todos, deleteTodo } = this.props;
 
     return (
       <section className="main">
         <ul className="todo-list">
-          {todos && todos.map(todo => <TodoItem key={todo.id} todo={todo} />)}
+          {todos && todos.map(todo => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              deleteTodo={deleteTodo}
+            />
+          ))}
         </ul>
         <Footer />
       </section>

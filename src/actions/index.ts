@@ -1,14 +1,9 @@
 import * as types from './ActionTypes';
 import { Todo } from '../main/model';
 
-export interface Action {
-  type: string;
-  payload: Todo;
-}
-
 export const addTodo = (text: string) => ({
   type: types.ADD_TODO,
-  payload: { completed: false, text },
+  payload: { todo: { completed: false, text } },
 });
 
 export const deleteTodo = (todo: Todo) => ({
