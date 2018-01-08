@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import * as React from 'react';
 
-import { Todos } from './model';
+import { Todo, Todos } from './model';
 import * as actions from '../actions/index';
 
 import {
@@ -16,13 +16,20 @@ interface AppProps {
 }
 
 class App extends React.Component<AppProps> {
-  render() {
+  render(): JSX.Element {
     const { todos, dispatch } = this.props;
 
     return (
       <div className="todoapp">
-        <Header addTodo={(text: string) => dispatch(actions.addTodo(text))}/>
-        <TodoList todos={todos}/>
+        <Header 
+          addTodo={(text: string) => dispatch(actions.addTodo(text))}
+        />
+        <TodoList
+          todos={todos}
+          deleteTodo={(todo: Todo) => dispatch(actions.deleteTodo(todo))}
+          editTodo={(todo: Todo, newText: string) => dispatch(actions.editTodo(todo, newText))}
+          toggleTodo={(todo: Todo) => dispatch(actions.toggleTodo(todo))}
+        />
       </div>
     );
   }
