@@ -13,7 +13,7 @@ interface TodoListProps {
 
 class TodoList extends React.Component<TodoListProps> {
   render(): JSX.Element {
-    const { todos, deleteTodo } = this.props;
+    const { todos, deleteTodo, toggleTodo } = this.props;
 
     return (
       <section className="main">
@@ -23,6 +23,7 @@ class TodoList extends React.Component<TodoListProps> {
               key={todo.id}
               todo={todo}
               deleteTodo={deleteTodo}
+              toggleTodo={toggleTodo}
             />
           ))}
         </ul>
