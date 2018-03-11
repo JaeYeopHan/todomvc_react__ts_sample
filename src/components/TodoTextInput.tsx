@@ -2,6 +2,7 @@ import * as React from 'react';
 import autobind from 'autobind-decorator';
 
 interface TodoTextInputProps {
+  addTodo: (text: string) => void;
   text?: string;
   placeholder?: string;
   editing?: boolean;
@@ -30,8 +31,9 @@ class TodoTextInput extends React.Component<TodoTextInputProps, TodoTextInputSta
   @autobind
   // tslint:disable-next-line:no-any
   handleSubmit(e: any) {
-    if (e.which === 13) {
+    if (e.which === 13 && e.target.value.trim() !== '') {
       if (this.props.newTodo) {
+        this.props.addTodo(e.target.value);
         this.setState({ text: '' });
       }
     }

@@ -16,7 +16,7 @@ class App extends React.Component<AppProps> {
     const store = this.props.todoStore as TodoStore;
     return (
       <div className="todoapp">
-        <Header />
+        <Header addTodo={store.addtodo} />
         <TodoList todos={store.todos}/>
       </div>
     );
