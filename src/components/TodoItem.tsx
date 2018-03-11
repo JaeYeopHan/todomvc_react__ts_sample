@@ -1,12 +1,19 @@
 import * as React from 'react';
+import { Todo } from '../main/model';
 
-class TodoItem extends React.Component<{todo: string}> {
+class TodoItem extends React.Component<{todo: Todo}> {
   render(): JSX.Element {
+    const { todo } = this.props;
+
     return (
-      <li>
+      <li id={`${todo.id}`}>
         <div className="view">
-          <input type="text" className="toggle"/>
-          <label>{this.props.todo}</label>
+          <input
+           className="toggle"
+           type="checkbox"
+           checked={todo.completed}
+          />
+          <label>{todo.text}</label>
         </div>
         <button className="destroy" />
       </li>
