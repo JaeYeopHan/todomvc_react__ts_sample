@@ -1,23 +1,26 @@
 import * as React from 'react';
+import { observer, inject } from 'mobx-react';
 
-import { Todos } from './model';
 import Header from '../components/Header';
 import TodoList from '../components/TodoList';
+import { TodoStore } from '../stores/todoStore';
 
-export default class App extends React.Component<{}> {
-  private todos: Todos = [
-    {
-      id: 0,
-      text: 'test',
-      completed: false,
-    }
-  ];
+interface AppProps {
+  todoStore?: TodoStore;
+}
+
+@inject('todoStore')
+@observer
+class App extends React.Component<AppProps> {
   render() {
+    const store = this.props.todoStore as TodoStore;
     return (
       <div className="todoapp">
         <Header />
-        <TodoList todos={this.todos}/>
+        <TodoList todos={store.todos}/>
       </div>
     );
   }
 }
+
+export default App;
